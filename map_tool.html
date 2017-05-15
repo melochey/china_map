@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>经纬度坐标与地图容器像素坐标相互转换</title>
+			<style type="text/css"> 
+				#mapContainer{position: absolute;top:100px;left: 100px;right:0;bottom:30px;height:500px;width:500px;}
+				#btnDiv{position:absolute;bottom:0;left:0px;height:30px;font-size:12px;} 
+			</style>
+		</head>
+		<body>
+			<div id="mapContainer"></div>
+			<div id="btnDiv"> 
+			</div>
+
+			<script type="text/javascript" src="http://223.100.246.29:9091/SDKService/jssdk/auth?v=1.0&key=3b59e866e30112c731ad0335df2102dc"></script> 
+			<script type="text/javascript" src="./CMMap.InfoWindow.js"></script>
+			<script type="text/javascript">
+				var toolBar = null;
+				var overview;
+				//初始化地图对象，加载地图
+				var map
+				= new CMMap.Map("mapContainer", { 
+					view: new CMMap.View2D({
+						center: new CMMap.LngLat(123.42409, 41.75508),
+						zoom:13
+					}),
+					zooms: [3, 18],
+					cursor: "default",
+					animateEnable: true,
+					rotateEnable: false,
+					resizeEnable: false,
+					dragEnable: true,
+					zoomEnable: true,
+					doubleClickZoom: true,
+					keyboardEnable: true,
+					jogEnable: true,
+					scrollWheel: true,
+					touchZoom: true,
+				});
+				
+				//在地图中添加ToolBar插件
+				
+				map.plugin(["CMMap.ToolBar","CMMap.OverView","CMMap.MapType", "CMMap.Scale"],function(){		
+					toolBar = new CMMap.ToolBar({size:20,offset:new CMMap.Pixel (10,10),ruler:true,direction:true}); //加载工具条 
+				    map.addControl(toolBar);   
+					overview = new CMMap.OverView({isOpen:false});
+					map.addControl(overview);
+					
+					maptype = new CMMap.MapType();
+				    map.addControl(maptype); 
+
+				    scale = new CMMap.Scale(); //加载比例尺
+    				map.addControl(scale);
+
+
+				}); 
+				
+				
+				 /*
+				
+				map.plugin(["CMMAP.ToolBar"],function()
+		    {  
+				    toolBar = new CMMAP.ToolBar(); //加载工具条 
+				    map.addControl(toolBar);   
+		    });
+		    
+		    map.plugin(["CMMAP.OverView"],function()
+		    {   
+				    overview = new CMMAP.OverView(); //加载鹰眼
+				    map.addControl(overview);   
+		    });
+		   
+		    
+				map.plugin(["CMMAP.ToolBar","CMMAP.OverView","CMMAP.Scale"],function()
+		    {  
+				    toolbar = new CMMAP.ToolBar(); //加载工具条 
+				    map.addControl(toolbar);     
+				    overview = new CMMAP.OverView(); //加载鹰眼
+				    map.addControl(overview);  
+				    scale = new CMMAP.Scale(); //加载比例尺
+				    map.addControl(scale);
+		    });
+		    */
+
+ 
+
+				 
+
+			</script>
+
+		</body>
+	</html>
